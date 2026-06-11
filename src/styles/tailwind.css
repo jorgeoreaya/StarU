@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables del tema StarU para los componentes shadcn (prefijo --sd- para
+   no colisionar con las variables del global.css existente).
+   Valores en componentes HSL porque tailwind.config los envuelve en hsl(). */
+@layer base {
+  :root {
+    --sd-background: 0 0% 100%;
+    --sd-foreground: 0 0% 14.9%;
+    --sd-card: 0 0% 100%;
+    --sd-card-foreground: 0 0% 14.9%;
+    --sd-popover: 0 0% 100%;
+    --sd-popover-foreground: 0 0% 14.9%;
+    --sd-primary: 37.7 92.1% 50.2%;
+    --sd-primary-foreground: 0 0% 0%;
+    --sd-secondary: 220 14.3% 95.9%;
+    --sd-secondary-foreground: 215 13.8% 34.1%;
+    --sd-muted: 210 20% 98%;
+    --sd-muted-foreground: 220 8.9% 46%;
+    --sd-accent: 48 100% 96.1%;
+    --sd-accent-foreground: 22.7 82.5% 31.4%;
+    --sd-destructive: 0 84.2% 60.2%;
+    --sd-destructive-foreground: 0 0% 100%;
+    --sd-border: 220 13% 91%;
+    --sd-input: 220 13% 91%;
+    --sd-ring: 37.7 92.1% 50.2%;
+    --sd-radius: 0.375rem;
+  }
+
+  .dark {
+    --sd-background: 0 0% 9%;
+    --sd-foreground: 0 0% 89.8%;
+    --sd-card: 0 0% 14.9%;
+    --sd-card-foreground: 0 0% 89.8%;
+    --sd-popover: 0 0% 14.9%;
+    --sd-popover-foreground: 0 0% 89.8%;
+    --sd-primary: 37.7 92.1% 50.2%;
+    --sd-primary-foreground: 0 0% 0%;
+    --sd-secondary: 0 0% 14.9%;
+    --sd-secondary-foreground: 0 0% 89.8%;
+    --sd-muted: 0 0% 12.2%;
+    --sd-muted-foreground: 0 0% 63.9%;
+    --sd-accent: 22.7 82.5% 31.4%;
+    --sd-accent-foreground: 48 96.6% 76.7%;
+    --sd-destructive: 0 84.2% 60.2%;
+    --sd-destructive-foreground: 0 0% 100%;
+    --sd-border: 0 0% 25.1%;
+    --sd-input: 0 0% 25.1%;
+    --sd-ring: 37.7 92.1% 50.2%;
+  }
+}

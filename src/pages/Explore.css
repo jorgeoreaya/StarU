@@ -1,0 +1,357 @@
+/* ============================================================
+   EXPLORE — hero de sección, toolbar contenida, grilla, tarjetas
+   ============================================================ */
+
+/* Más aire bajo la navbar fija (68px) para que el hero no se pegue */
+.explore-page {
+  padding-top: clamp(140px, 16vh, 180px);
+}
+
+/* ---------- Hero de sección: título + contador ---------- */
+.explore-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(40px, 5vh, 60px);
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.explore-hero-text {
+  text-align: left;
+  min-width: 0;
+}
+
+.explore-hero-text h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.explore-hero-text p {
+  color: var(--text-soft);
+  font-size: 1.05rem;
+}
+
+.explore-count {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--primary) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+.explore-count-num {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--primary);
+}
+
+.explore-count-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  margin-top: 4px;
+}
+
+/* ---------- Toolbar contenida (búsqueda + tabs en una tarjeta) ---------- */
+.explore-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Barra de búsqueda ---------- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 320px;
+  min-width: 240px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 18px;
+  color: var(--text-dim);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar > svg {
+  flex-shrink: 0;
+}
+
+.search-bar:focus-within {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary),
+    0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  color: var(--text);
+}
+
+.search-bar input::placeholder {
+  color: var(--text-dim);
+}
+
+.search-bar input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ---------- Pestañas (shadcn Tabs) ---------- */
+.explore-tabs {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+/* ---------- Grilla de tarjetas ---------- */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+/* La envoltura de reveal debe estirarse a la altura completa de la celda
+   para que ProfileCard (height:100%) conserve su layout */
+.explore-grid > .reveal {
+  display: flex;
+}
+
+.explore-grid > .reveal > * {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .explore-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .explore-count {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    align-self: stretch;
+    justify-content: center;
+  }
+  .explore-count-label {
+    margin-top: 0;
+  }
+  .explore-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .explore-tabs {
+    width: 100%;
+  }
+}
+
+/* ---------- PROFILE CARD ---------- */
+.profile-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--primary) 60%, var(--border));
+  box-shadow: 0 22px 48px -14px color-mix(in srgb, var(--primary) 45%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent),
+    var(--shadow-sm);
+}
+
+.profile-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.profile-card-media img,
+.profile-card-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.profile-card:hover .profile-card-media img,
+.profile-card:hover .profile-card-media video {
+  transform: scale(1.04);
+}
+
+.profile-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  background: var(--grad-primary);
+  font-family: var(--font-display);
+}
+
+.profile-card-role {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.profile-card-playhint {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(4px);
+  border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+  color: var(--text);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Cuerpo: fila avatar + nombre/rubro, luego descripción */
+.profile-card-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.profile-card-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.profile-card-avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--grad-primary);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fff;
+  font-family: var(--font-display);
+}
+
+.profile-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-card-identity-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-card-body h3 {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-card-subtitle {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.84rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-card-desc {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer separado por borde: ciudad + "Ver perfil" */
+.profile-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 50%, var(--surface));
+}
+
+.profile-card-city {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-card-cta {
+  flex-shrink: 0;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+.profile-card:hover .profile-card-cta {
+  gap: 8px;
+}

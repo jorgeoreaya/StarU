@@ -1,0 +1,1142 @@
+/* ============================================================
+   StarU — Páginas de autenticación (Login / Register)
+   ============================================================ */
+
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+}
+
+.auth-page .container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ---------- Tarjeta base ---------- */
+.auth-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(32px, 5vw, 56px);
+  width: 100%;
+}
+
+.auth-card.center-narrow {
+  max-width: 440px;
+}
+
+.auth-card.auth-card-wide {
+  max-width: 780px;
+}
+
+/* ---------- Encabezado ---------- */
+.auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-header h1 {
+  font-size: 1.8rem;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  color: var(--text-soft);
+  font-size: 0.98rem;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.92rem;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   LOGIN
+   ============================================================ */
+
+/* Toggle de rol */
+.role-toggle {
+  display: flex;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+}
+
+.role-toggle-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s ease, box-shadow 0.3s ease, transform 0.25s ease;
+}
+
+.role-toggle-btn svg {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.role-toggle-btn:hover {
+  color: var(--text);
+}
+
+/* Emprendedor activo: ámbar */
+.role-toggle-btn.active {
+  background: var(--grad-primary);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+.role-toggle-btn.active svg {
+  transform: scale(1.12);
+}
+
+/* Inversor activo: violeta (color del rol inversor) */
+.role-toggle-btn.active-inversor {
+  background: linear-gradient(135deg, hsl(258 90% 66%), hsl(262 83% 58%));
+  color: #fff;
+}
+
+.role-toggle-btn.active:hover,
+.role-toggle-btn.active-inversor:hover {
+  color: #fff;
+}
+
+.role-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35);
+}
+
+/* En login los campos respiran un poco más */
+.auth-card.center-narrow .form-group {
+  margin-bottom: 18px;
+}
+
+/* ============================================================
+   REGISTRO
+   ============================================================ */
+
+/* ---------- Títulos de paso ---------- */
+.step-title {
+  text-align: center;
+  margin-bottom: 6px;
+  font-size: 1.35rem;
+}
+
+.step-title.icon-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.step-title.icon-text svg {
+  color: var(--primary);
+}
+
+.step-subtitle {
+  text-align: center;
+  color: var(--text-soft);
+  margin-bottom: 26px;
+  font-size: 0.95rem;
+}
+
+/* El primer título de cada paso necesita aire antes del formulario */
+.step-title + .role-selector,
+.step-title + .form-grid,
+.step-title + .preview-card {
+  margin-top: 22px;
+}
+
+/* ---------- Indicador de pasos ---------- */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 26px;
+}
+
+.step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border);
+  flex-shrink: 0;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.step-dot.active {
+  background: var(--primary);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
+  transform: scale(1.1);
+}
+
+.step-dot.completed {
+  background: var(--success);
+}
+
+.step-line {
+  width: 48px;
+  height: 2px;
+  margin: 0 8px;
+  background: var(--border);
+  border-radius: 2px;
+  transition: background 0.25s;
+}
+
+.step-line.filled {
+  background: var(--success);
+}
+
+/* ---------- Selector de rol (paso 1) ---------- */
+.role-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  color: inherit;
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.18);
+}
+
+.role-card:focus-visible {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35);
+}
+
+.role-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(245, 158, 11, 0.14);
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+/* Acentos por rol (alineados con las pills de preview) */
+.role-card.role-emprendimiento .role-icon {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+}
+.role-card.role-emprendimiento:hover {
+  border-color: #fbbf24;
+  box-shadow: 0 10px 30px rgba(245, 158, 11, 0.18);
+}
+
+.role-card.role-startup .role-icon {
+  background: rgba(52, 211, 153, 0.14);
+  color: #34d399;
+}
+.role-card.role-startup:hover {
+  border-color: #34d399;
+  box-shadow: 0 10px 30px rgba(52, 211, 153, 0.18);
+}
+
+.role-card.role-inversor .role-icon {
+  background: rgba(167, 139, 250, 0.14);
+  color: #a78bfa;
+}
+.role-card.role-inversor:hover {
+  border-color: #a78bfa;
+  box-shadow: 0 10px 30px rgba(167, 139, 250, 0.18);
+}
+
+.role-card h4 {
+  font-size: 1.12rem;
+  margin-bottom: 6px;
+}
+
+.role-card p {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+/* Las features se anclan al fondo para igualar las tarjetas */
+.role-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.role-features li {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  align-items: flex-start;
+}
+
+.feature-check {
+  color: var(--success);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ---------- Acciones de formulario ---------- */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---------- Productos (paso 3 fundador) ---------- */
+.product-input-row {
+  display: grid;
+  grid-template-columns: 1fr 140px auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.products-list:empty {
+  margin-top: 0;
+}
+
+.product-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 8px 6px 14px;
+  font-size: 0.85rem;
+}
+
+.product-chip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.product-chip button:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger);
+}
+
+/* ---------- Tags de interés (paso 3 inversor) ---------- */
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.interest-tag {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.interest-tag:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.interest-tag:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.35);
+}
+
+.interest-tag.active {
+  background: var(--grad-primary);
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ---------- Media uploader ---------- */
+.media-uploader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.media-preview {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.media-preview-img {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+}
+
+.media-preview-video {
+  width: 100%;
+  max-height: 240px;
+}
+
+/* ---------- Preview (paso 4) ---------- */
+.preview-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.preview-head {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.preview-head > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.preview-head h4 {
+  font-size: 1.2rem;
+}
+
+.preview-head .pill {
+  align-self: flex-start;
+}
+
+.preview-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.preview-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-city {
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.preview-text {
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* ============================================================
+   LOGIN — Layout de dos paneles (split)
+   ============================================================ */
+.auth-page-split .container {
+  display: block;
+  max-width: 1040px;
+}
+
+.auth-split {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Panel decorativo izquierdo */
+.auth-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 44px 40px;
+  background: var(--grad-primary);
+  color: #fff;
+  overflow: hidden;
+  transition: background 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* El panel cambia de color según el modo seleccionado en el toggle.
+   Construimos el gradiente a partir de #a78bfa (el violeta de marca
+   del rol inversor usado en badges, role-cards y acentos) para que
+   el branding sea consistente, en vez de un HSL suelto. */
+.auth-split[data-mode='inversor'] .auth-aside {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, #a78bfa 92%, #fff),
+    color-mix(in srgb, #a78bfa 72%, #000)
+  );
+}
+
+.auth-aside::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(420px circle at 100% 0%, color-mix(in srgb, #fff 22%, transparent), transparent 55%),
+    radial-gradient(360px circle at 0% 100%, color-mix(in srgb, #fff 14%, transparent), transparent 55%);
+  pointer-events: none;
+}
+
+.auth-aside-top,
+.auth-aside-body {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-aside-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #fff;
+}
+
+.auth-aside-title {
+  font-size: 1.85rem;
+  line-height: 1.2;
+  color: #fff;
+  margin-bottom: 26px;
+}
+
+.auth-aside-benefits {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-aside-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.auth-aside-benefit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: color-mix(in srgb, #fff 20%, transparent);
+  color: #fff;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #fff 22%, transparent);
+  backdrop-filter: blur(2px);
+}
+
+.auth-aside-benefits strong {
+  display: block;
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+
+.auth-aside-benefits span {
+  display: block;
+  font-size: 0.86rem;
+  color: color-mix(in srgb, #fff 82%, transparent);
+  line-height: 1.45;
+}
+
+/* Panel derecho del formulario */
+.auth-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 44px 40px;
+}
+
+.auth-form-panel .auth-card.auth-card-flush {
+  max-width: 380px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* ============================================================
+   REGISTRO — Stepper con etiquetas
+   ============================================================ */
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 30px;
+}
+
+.step-progress-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.step-progress-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background 0.25s, color 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.step-progress-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: color 0.25s;
+}
+
+.step-progress-item.active .step-progress-marker {
+  background: var(--grad-primary);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent);
+  transform: scale(1.05);
+}
+
+.step-progress-item.active .step-progress-label {
+  color: var(--text);
+}
+
+.step-progress-item.completed .step-progress-marker {
+  background: color-mix(in srgb, var(--success) 16%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--success) 50%, transparent);
+  color: var(--success);
+}
+
+.step-progress-item.completed .step-progress-label {
+  color: var(--text-soft);
+}
+
+.step-progress-line {
+  flex: 1;
+  max-width: 56px;
+  height: 2px;
+  margin: 0 10px;
+  margin-bottom: 28px;
+  background: var(--border);
+  border-radius: 2px;
+  transition: background 0.25s;
+}
+
+.step-progress-line.filled {
+  background: color-mix(in srgb, var(--success) 60%, transparent);
+}
+
+/* ============================================================
+   REGISTRO — Tarjetas de rol (paso 1) rediseñadas
+   ============================================================ */
+.role-card {
+  position: relative;
+  align-items: center;
+  text-align: center;
+  padding-top: 26px;
+}
+
+.role-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--border);
+  transition: background 0.2s;
+}
+
+.role-card.role-emprendimiento .role-card-accent { background: color-mix(in srgb, #fbbf24 70%, transparent); }
+.role-card.role-startup .role-card-accent { background: color-mix(in srgb, #34d399 70%, transparent); }
+.role-card.role-inversor .role-card-accent { background: color-mix(in srgb, #a78bfa 70%, transparent); }
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  margin-bottom: 18px;
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.role-card:hover .role-badge {
+  transform: scale(1.06);
+}
+
+.role-card.role-emprendimiento .role-badge {
+  background: color-mix(in srgb, #fbbf24 16%, transparent);
+  color: #fbbf24;
+}
+.role-card.role-startup .role-badge {
+  background: color-mix(in srgb, #34d399 16%, transparent);
+  color: #34d399;
+}
+.role-card.role-inversor .role-badge {
+  background: color-mix(in srgb, #a78bfa 16%, transparent);
+  color: #a78bfa;
+}
+
+.role-card .role-features {
+  width: 100%;
+  text-align: left;
+}
+
+.role-card-cta {
+  margin-top: auto;
+  padding-top: 16px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary);
+  opacity: 0.55;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.role-card.role-emprendimiento .role-card-cta { color: #fbbf24; }
+.role-card.role-startup .role-card-cta { color: #34d399; }
+.role-card.role-inversor .role-card-cta { color: #a78bfa; }
+
+.role-card:hover .role-card-cta,
+.role-card:focus-visible .role-card-cta {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* ============================================================
+   REGISTRO — Secciones del formulario (paso 3)
+   ============================================================ */
+.form-section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.form-section-head span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.form-section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ============================================================
+   REGISTRO — Preview tipo tarjeta de perfil (paso 4)
+   ============================================================ */
+.preview-shell {
+  display: flex;
+  justify-content: center;
+}
+
+.preview-card-profile {
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 420px;
+  gap: 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.preview-card-profile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+
+.preview-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--grad-primary);
+}
+
+.preview-media-fill {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.preview-media-role {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.preview-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px 24px;
+}
+
+.preview-body h4 {
+  font-size: 1.2rem;
+}
+
+.preview-subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+  .auth-aside {
+    display: none;
+  }
+  .auth-form-panel {
+    padding: 36px 28px;
+  }
+  .auth-form-panel .auth-card.auth-card-flush {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 720px) {
+  .role-selector {
+    grid-template-columns: 1fr;
+  }
+  .role-card {
+    padding: 22px 20px;
+  }
+  /* En una sola columna las features no necesitan anclarse al fondo */
+  .role-features {
+    margin-top: 14px;
+  }
+  .product-input-row {
+    grid-template-columns: 1fr;
+  }
+  .auth-card {
+    padding: 26px 20px;
+  }
+  .form-actions {
+    margin-top: 22px;
+    padding-top: 18px;
+  }
+  .step-progress-label {
+    font-size: 0.74rem;
+  }
+  .step-progress-line {
+    max-width: 32px;
+    margin: 0 6px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .role-toggle-btn {
+    font-size: 0.82rem;
+    padding: 10px 6px;
+  }
+  .auth-form-panel {
+    padding: 30px 20px;
+  }
+  .step-progress-marker {
+    width: 30px;
+    height: 30px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ============================================================
+   PULIDO VISUAL — Separación, profundidad y animaciones
+   ============================================================ */
+
+/* ---------- Separación / centrado ----------
+   Damos más aire respecto a la navbar fija y centramos con holgura
+   sin que el contenido alto quede pegado arriba. */
+.auth-page {
+  min-height: calc(100vh - 8px);
+  padding-top: 108px;
+  padding-bottom: 88px;
+}
+
+.auth-card-wide,
+.auth-split {
+  margin-inline: auto;
+}
+
+/* El selector de rol y el stepper respiran un poco más */
+.role-selector {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+/* ---------- Transición de entrada al cambiar de paso ----------
+   Cada paso monta con key distinta, así re-anima en cada navegación. */
+.step-content {
+  animation: step-enter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-content {
+    animation: none;
+  }
+}
+
+/* ---------- Panel decorativo de Login: más profundidad ----------
+   Mantenemos el gradiente base y sumamos una textura sutil de puntos
+   y un velo de borde interno con color-mix (sin nuevos hex). */
+.auth-aside {
+  box-shadow:
+    inset -1px 0 0 color-mix(in srgb, #fff 12%, transparent),
+    inset 0 0 80px color-mix(in srgb, #fff 6%, transparent);
+}
+
+.auth-aside::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    color-mix(in srgb, #fff 16%, transparent) 1px,
+    transparent 1.4px
+  );
+  background-size: 22px 22px;
+  opacity: 0.5;
+  mask-image: radial-gradient(120% 100% at 0% 0%, #fff, transparent 78%);
+  -webkit-mask-image: radial-gradient(120% 100% at 0% 0%, #fff, transparent 78%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* La textura/velo blancos se calibraron sobre el ámbar; el violeta
+   del modo inversor es más claro, así que atenuamos ligeramente los
+   realces blancos para que la textura no se sobreexponga. */
+.auth-split[data-mode='inversor'] .auth-aside {
+  box-shadow:
+    inset -1px 0 0 color-mix(in srgb, #fff 10%, transparent),
+    inset 0 0 80px color-mix(in srgb, #fff 4%, transparent);
+}
+
+.auth-split[data-mode='inversor'] .auth-aside::before {
+  opacity: 0.4;
+}
+
+/* El contenido del aside debe quedar por encima de la textura */
+.auth-aside-top,
+.auth-aside-body {
+  z-index: 1;
+}
+
+/* ---------- Inputs: foco pulido (scoped a auth) ---------- */
+.auth-card .form-group input,
+.auth-card .form-group textarea,
+.auth-card .form-group button[role='combobox'] {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.auth-card .form-group input:hover,
+.auth-card .form-group textarea:hover,
+.auth-card .form-group button[role='combobox']:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+}
+
+.auth-card .form-group input:focus-visible,
+.auth-card .form-group textarea:focus-visible,
+.auth-card .form-group button[role='combobox']:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+/* ---------- Botón gradiente: hover/elevación más rica ---------- */
+.auth-card .form-actions button,
+.auth-form-panel button[type='submit'] {
+  transition: transform 0.18s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.auth-card .form-actions button:hover:not(:disabled),
+.auth-form-panel button[type='submit']:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* ---------- Role-cards premium: hover más elevado y suave ---------- */
+.role-card {
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+}
+
+.role-card:hover {
+  transform: translateY(-6px);
+  background: color-mix(in srgb, var(--surface) 70%, var(--surface-2));
+}
+
+.role-card.role-emprendimiento:hover {
+  box-shadow: 0 18px 42px color-mix(in srgb, #fbbf24 26%, transparent);
+}
+.role-card.role-startup:hover {
+  box-shadow: 0 18px 42px color-mix(in srgb, #34d399 26%, transparent);
+}
+.role-card.role-inversor:hover {
+  box-shadow: 0 18px 42px color-mix(in srgb, #a78bfa 26%, transparent);
+}
+
+/* El acento superior se engrosa sutilmente al pasar el cursor */
+.role-card-accent {
+  height: 4px;
+  transition: height 0.24s ease, background 0.24s ease;
+}
+.role-card:hover .role-card-accent,
+.role-card:focus-visible .role-card-accent {
+  height: 6px;
+}
+.role-card.role-emprendimiento:hover .role-card-accent { background: #fbbf24; }
+.role-card.role-startup:hover .role-card-accent { background: #34d399; }
+.role-card.role-inversor:hover .role-card-accent { background: #a78bfa; }
+
+.role-card:hover .role-badge {
+  transform: scale(1.08) translateY(-1px);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* ---------- Preview (paso 4): un punto más de profundidad ---------- */
+.preview-card-profile:hover {
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+/* ---------- Chips de interés activos: leve elevación ---------- */
+.interest-tag.active {
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 28%, transparent);
+}
