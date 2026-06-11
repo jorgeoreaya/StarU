@@ -2,7 +2,10 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+// En producción la app se sirve bajo https://<usuario>.github.io/StarU/,
+// por eso el build usa base '/StarU/'. En desarrollo se mantiene en la raíz.
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/StarU/' : '/',
   plugins: [react()],
   resolve: {
     alias: {
@@ -13,4 +16,4 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
-})
+}))
