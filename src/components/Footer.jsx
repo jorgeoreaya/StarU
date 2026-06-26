@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logo from '../assets/staru-logo.jpeg'
 import './Footer.css'
 
 // Iconos SVG en línea (la versión de lucide-react instalada no incluye estas marcas).
@@ -51,7 +52,8 @@ export default function Footer() {
       <div className="container site-footer-inner">
         <div className="site-footer-brand">
           <Link to="/" className="site-footer-logo">
-            Star<span className="text-gradient">U</span>
+            <img src={logo} alt="StarU" className="site-footer-logo-img" />
+            <span>Star<span className="text-gradient">U</span></span>
           </Link>
           <p>Conectamos ideas con el capital que las hace realidad.</p>
         </div>

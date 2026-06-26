@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Star, Sun, Moon } from 'lucide-react'
+import { Sun, Moon } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import { Button } from '@/components/ui/button'
+import logo from '../assets/staru-logo.jpeg'
 import './Navbar.css'
 
 const links = [
@@ -40,7 +41,7 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-logo" onClick={() => setOpen(false)}>
-          <span className="logo-icon"><Star size={20} fill="currentColor" /></span>
+          <img src={logo} alt="StarU" className="logo-img" />
           <span className="logo-text">
             Star<span className="text-gradient">U</span>
           </span>
